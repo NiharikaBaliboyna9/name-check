@@ -3,6 +3,7 @@ import {
   BedrockRuntimeClient,
   ConverseCommand,
 } from "@aws-sdk/client-bedrock-runtime";
+import { fromEnv } from "@aws-sdk/credential-providers";
 
 const MODEL_ID =
   process.env.BEDROCK_MODEL_ID ?? "us.amazon.nova-pro-v1:0";
@@ -19,10 +20,7 @@ console.log("ALL ENV:", JSON.stringify(process.env));
 
 const client = new BedrockRuntimeClient({
   region: "us-east-1",
-  credentials: {
-    accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
-  },
+  credentials: fromEnv(),
 });
 
 function parseName(fullName: string): { part: string; name: string }[] {
