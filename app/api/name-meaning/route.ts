@@ -7,9 +7,7 @@ import {
 const MODEL_ID =
   process.env.BEDROCK_MODEL_ID ?? "us.amazon.nova-pro-v1:0";
 
-const client = new BedrockRuntimeClient({
-  region: process.env.APP_REGION ?? "us-east-1",
-});
+const client = new BedrockRuntimeClient({ region: "us-east-1" });
 
 function parseName(fullName: string): { part: string; name: string }[] {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
