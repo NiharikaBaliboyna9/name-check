@@ -41,6 +41,9 @@ export default function Home() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
+        if (body.code === "NO_CREDENTIALS") {
+          throw new Error("__CREDENTIALS__");
+        }
         throw new Error(body.error || "Failed to analyze name");
       }
 
@@ -136,9 +139,24 @@ export default function Home() {
 
           {/* Error */}
           {error && (
-            <div className="mt-6 glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm">
-              ⚠ {error}
-            </div>
+            error === "__CREDENTIALS__" ? (
+              <div className="mt-6 glass rounded-xl p-5 border border-amber-500/25 text-sm">
+                <p className="text-amber-400 font-semibold mb-2">⚙ AWS credentials not configured</p>
+                <p className="text-slate-400 leading-relaxed mb-3">
+                  NamesPlay needs AWS credentials to reach Amazon Bedrock. Add these in the{" "}
+                  <span className="text-white">Amplify Console → Hosting → Environment variables</span>, then redeploy:
+                </p>
+                <ul className="space-y-1 font-mono text-xs text-slate-300">
+                  <li><span className="text-amber-400">AWS_REGION</span> = us-east-1</li>
+                  <li><span className="text-amber-400">AWS_ACCESS_KEY_ID</span> = your key</li>
+                  <li><span className="text-amber-400">AWS_SECRET_ACCESS_KEY</span> = your secret</li>
+                </ul>
+              </div>
+            ) : (
+              <div className="mt-6 glass rounded-xl p-4 border border-red-500/20 text-red-400 text-sm">
+                ⚠ {error}
+              </div>
+            )
           )}
 
           {/* Loading skeleton */}
