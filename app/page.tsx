@@ -147,9 +147,9 @@ export default function Home() {
                   <span className="text-white">Amplify Console → Hosting → Environment variables</span>, then redeploy:
                 </p>
                 <ul className="space-y-1 font-mono text-xs text-slate-300">
-                  <li><span className="text-amber-400">AWS_REGION</span> = us-east-1</li>
-                  <li><span className="text-amber-400">AWS_ACCESS_KEY_ID</span> = your key</li>
-                  <li><span className="text-amber-400">AWS_SECRET_ACCESS_KEY</span> = your secret</li>
+                  <li><span className="text-amber-400">APP_REGION</span> = us-east-1</li>
+                  <li><span className="text-amber-400">APP_ACCESS_KEY_ID</span> = your key</li>
+                  <li><span className="text-amber-400">APP_SECRET_ACCESS_KEY</span> = your secret</li>
                 </ul>
               </div>
             ) : (
