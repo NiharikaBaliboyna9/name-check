@@ -6,6 +6,9 @@ frontend:
         - npm ci
     build:
       commands:
+        - echo "APP_AWS_ACCESS_KEY_ID=$APP_AWS_ACCESS_KEY_ID" >> .env.production
+        - echo "APP_AWS_SECRET_ACCESS_KEY=$APP_AWS_SECRET_ACCESS_KEY" >> .env.production
+        - echo "APP_AWS_REGION=$APP_AWS_REGION" >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
