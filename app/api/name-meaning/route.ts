@@ -94,15 +94,6 @@ Return only the JSON array, nothing else.`;
   } catch (err) {
     console.error("Bedrock error:", err);
     const message = err instanceof Error ? err.message : "Unknown error from Bedrock";
-    const isCredentialsError =
-      message.includes("credentials") ||
-      message.includes("Credentials") ||
-      message.includes("Could not load") ||
-      message.includes("ExpiredToken") ||
-      message.includes("InvalidClientTokenId");
-    return NextResponse.json(
-      { error: message, code: isCredentialsError ? "NO_CREDENTIALS" : "BEDROCK_ERROR" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
