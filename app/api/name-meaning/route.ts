@@ -15,7 +15,13 @@ console.log("ENV CHECK:", {
   AWS_WEB_IDENTITY_TOKEN_FILE: process.env.AWS_WEB_IDENTITY_TOKEN_FILE,
 });
 
-const client = new BedrockRuntimeClient({ region: "us-east-1" });
+const client = new BedrockRuntimeClient({
+  region: "us-east-1",
+  credentials: {
+    accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
+  },
+});
 
 function parseName(fullName: string): { part: string; name: string }[] {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
