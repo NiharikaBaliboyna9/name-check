@@ -8,11 +8,7 @@ const MODEL_ID =
   process.env.BEDROCK_MODEL_ID ?? "us.amazon.nova-pro-v1:0";
 
 const client = new BedrockRuntimeClient({
-  region: process.env.APP_REGION,
-  credentials: {
-    accessKeyId: process.env.APP_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.APP_SECRET_ACCESS_KEY!,
-  },
+  region: process.env.APP_REGION ?? "us-east-1",
 });
 
 function parseName(fullName: string): { part: string; name: string }[] {
