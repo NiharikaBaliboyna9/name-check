@@ -7,13 +7,7 @@ import {
 const MODEL_ID =
   process.env.BEDROCK_MODEL_ID ?? "us.amazon.nova-pro-v1:0";
 
-const client = new BedrockRuntimeClient({
-  region: "us-east-1",
-  credentials: {
-   accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
-  },
-});
+
 
 function parseName(fullName: string): { part: string; name: string }[] {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
@@ -68,6 +62,14 @@ Return an array where each element has this exact structure:
 }
 
 Return only the JSON array, nothing else.`;
+
+  const client = new BedrockRuntimeClient({
+    region: process.env.APP_AWS_REGION ?? "us-east-1",
+    credentials: {
+      accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
+    },
+  });
 
   try {
     const command = new ConverseCommand({
