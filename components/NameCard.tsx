@@ -99,7 +99,7 @@ export default function NameCard({ analysis, index }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
           <Section title="Personality Traits">
             <div className="flex flex-wrap gap-2 mt-1">
-              {analysis.traits.map((trait) => (
+              {(analysis.traits ?? []).map((trait) => (
                 <span
                   key={trait}
                   className="text-xs px-3 py-1 rounded-full border text-slate-300"
@@ -116,7 +116,7 @@ export default function NameCard({ analysis, index }: Props) {
 
           <Section title="Notable Bearers">
             <ul className="mt-1 space-y-1">
-              {analysis.notableBearers.map((person) => (
+              {(analysis.notableBearers ?? []).map((person) => (
                 <li key={person} className="flex items-center gap-2 text-sm text-slate-300">
                   <span style={{ color: cfg.dot }}>›</span>
                   {person}
