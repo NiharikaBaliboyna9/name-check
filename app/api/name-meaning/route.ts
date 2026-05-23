@@ -63,12 +63,24 @@ Return an array where each element has this exact structure:
 
 Return only the JSON array, nothing else.`;
 
+  const accessKeyId = process.env.APP_AWS_ACCESS_KEY_ID;
+  const secretAccessKey = process.env.APP_AWS_SECRET_ACCESS_KEY;
+  const region = process.env.APP_AWS_REGION ?? "us-east-1";
+
+  console.log("DEBUG credentials check:", {
+    hasAccessKey: !!accessKeyId,
+    accessKeyPrefix: accessKeyId?.slice(0, 4),
+    hasSecret: !!secretAccessKey,
+    region,
+  });
+
+  if (!accessKeyId || !secretAccessKey) {
+    return NextResponse.json({ error: "Missing AWS credentials in environment" }, { status: 500 });
+  }
+
   const client = new BedrockRuntimeClient({
-    region: process.env.APP_AWS_REGION ?? "us-east-1",
-    credentials: {
-      accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
-      secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
-    },
+    region,
+    credentials: { accessKeyId, secretAccessKey },
   });
 
   try {
