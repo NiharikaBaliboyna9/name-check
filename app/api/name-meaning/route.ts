@@ -7,6 +7,14 @@ import {
 const MODEL_ID =
   process.env.BEDROCK_MODEL_ID ?? "us.amazon.nova-pro-v1:0";
 
+console.log("ENV CHECK:", {
+  AWS_REGION: process.env.AWS_REGION,
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID?.slice(0, 8),
+  AWS_ROLE_ARN: process.env.AWS_ROLE_ARN,
+  AWS_CONTAINER_CREDENTIALS_RELATIVE_URI: process.env.AWS_CONTAINER_CREDENTIALS_RELATIVE_URI,
+  AWS_WEB_IDENTITY_TOKEN_FILE: process.env.AWS_WEB_IDENTITY_TOKEN_FILE,
+});
+
 const client = new BedrockRuntimeClient({ region: "us-east-1" });
 
 function parseName(fullName: string): { part: string; name: string }[] {
