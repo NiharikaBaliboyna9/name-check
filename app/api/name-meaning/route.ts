@@ -15,11 +15,7 @@ console.log("ENV CHECK:", {
   AWS_WEB_IDENTITY_TOKEN_FILE: process.env.AWS_WEB_IDENTITY_TOKEN_FILE,
 });
 
-console.log("CRED CHECK:", {
-  keyId: process.env.APP_AWS_ACCESS_KEY_ID,
-  keyIdLength: process.env.APP_AWS_ACCESS_KEY_ID?.length,
-  secretLength: process.env.APP_AWS_SECRET_ACCESS_KEY?.length,
-});
+console.log("ALL ENV:", JSON.stringify(process.env));
 
 const client = new BedrockRuntimeClient({
   region: "us-east-1",
