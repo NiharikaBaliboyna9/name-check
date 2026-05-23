@@ -9,11 +9,10 @@ const MODEL_ID =
 
 const client = new BedrockRuntimeClient({
   region: "us-east-1",
-  // 
-  // credentials: {
-  //  accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
-  //   secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
-  // },
+  credentials: {
+   accessKeyId: process.env.APP_AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.APP_AWS_SECRET_ACCESS_KEY!,
+  },
 });
 
 function parseName(fullName: string): { part: string; name: string }[] {
